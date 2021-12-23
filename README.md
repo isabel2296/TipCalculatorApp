@@ -18,7 +18,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] User can switch on/off the split by party size option to display the amount for each party member. 
+- [x] User can switch on/off the split by party size option to display the amount to be paid for each party member. 
 
 ## Video Walkthrough
 
@@ -30,7 +30,6 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
 
 ## License
 
