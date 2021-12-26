@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     
     var total : Double? = 0.0
     
+    
     func splitOffOn (_ comand : Bool) {
         // if command is true keeps the following objects hidden, unhidden if false
         decrementPartyButton.isHidden = comand
@@ -44,17 +45,45 @@ class ViewController: UIViewController {
         // Update Split Amount Label
         splitAmountLabel.text = String(format: "$%.2f", splitAmount)
     }
-    
+    func hideNumPad(){
+        // Create a toolbar
+        let bar = UIToolbar()
+        
+        // Create a button user can trigger to dismiss number pad
+        let dismissButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(triggeredHideNumpad))
+        
+        // add button to toolbar
+        bar.items = [dismissButton]
+        bar.sizeToFit()
+        
+        // Add Done to current text field
+        billAmountTextField.inputAccessoryView = bar
+    }
+    @objc func triggeredHideNumpad(){
+        view.endEditing(true)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // Have text field visable at launch and set to numberpad
+        billAmountTextField.keyboardType = UIKeyboardType.numberPad
+        billAmountTextField.becomeFirstResponder()
+        hideNumPad()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // Automatically have split check option turned off and call helper funtions to hide object
         hideSplitTotal.isOn = false
         splitOffOn(true)
+        
+        // Allows the numberpad to be dismissed
+        
+        
     }
 
-  
-  
+
     @IBAction func calculateTipSlider(_ sender: Any) {
         // Get bill amount from the text input
         let bill = Double(billAmountTextField.text!) ?? 0
@@ -70,6 +99,11 @@ class ViewController: UIViewController {
         tipAmountLabel.text = String(format: "$%.2f",tip)
         // Update Total Amount
         totalLabel.text = String(format: "$%.2f",total!)
+        // Automatically update split by amount if Split Bill feature is turned on
+        if(hideSplitTotal.isOn){
+            let partySize = Int(splitNumLabel.text!) ?? 1
+            calculateSplitAmmount(partySize)
+        }
         
     }
     
@@ -92,13 +126,15 @@ class ViewController: UIViewController {
     @IBAction func showSplitTotal(_ sender: Any) {
         // Turn split option on or off based on switch
         if (hideSplitTotal.isOn){
+            let partySize = Int(splitNumLabel.text!) ?? 1
+            calculateSplitAmmount(partySize)
             splitOffOn(false)
         }
         else{
             splitOffOn(true)
         }
-        
     }
+    
    
 }
 
