@@ -46,6 +46,9 @@ class ViewController: UIViewController {
         splitAmountLabel.text = String(format: "$%.2f", splitAmount)
     }
     func hideNumPad(){
+        // Source for hiding numberpad code:
+        // https://medium.com/flawless-app-stories/keyboard-handling-in-ios-swift-5-8b60d602a8f
+        
         // Create a toolbar
         let bar = UIToolbar()
         
@@ -66,7 +69,7 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
 
         // Have text field visable at launch and set to numberpad
-        billAmountTextField.keyboardType = UIKeyboardType.numberPad
+        billAmountTextField.keyboardType = UIKeyboardType.decimalPad
         billAmountTextField.becomeFirstResponder()
         hideNumPad()
     }
@@ -77,10 +80,6 @@ class ViewController: UIViewController {
         // Automatically have split check option turned off and call helper funtions to hide object
         hideSplitTotal.isOn = false
         splitOffOn(true)
-        
-        // Allows the numberpad to be dismissed
-        
-        
     }
 
 
