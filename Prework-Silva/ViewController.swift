@@ -72,6 +72,9 @@ class ViewController: UIViewController {
         billAmountTextField.keyboardType = UIKeyboardType.decimalPad
         billAmountTextField.becomeFirstResponder()
         hideNumPad()
+        
+        // Change curser color to blue
+        billAmountTextField.tintColor = .blue
     }
 
     override func viewDidLoad() {
@@ -80,6 +83,10 @@ class ViewController: UIViewController {
         // Automatically have split check option turned off and call helper funtions to hide object
         hideSplitTotal.isOn = false
         splitOffOn(true)
+        
+        // Set a custom image for screen
+//        self.view.backgroundColor = UIColor(patternImage: UIImage(named:"iphoneWater.png")!)
+        
     }
 
 
